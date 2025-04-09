@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Détail du Projet - {{ projet.nom_projet }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Détail du Projet</h2>
+    <div>
+        <a href="{% url 'projets:projet_update_statut' projet.pk %}" class="btn btn-warning me-2">
+            <i class="bi bi-pencil"></i> Modifier statut
+        </a>
+        <a href="{% url 'projets:projet_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">{{ projet.nom_projet }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h5>Informations générales</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Code:</strong> {{ projet.code_projet }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Type:</strong> {{ projet.type_projet }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Statut:</strong>
+                        <span class="badge 
+                            {% if projet.statut == 'VALIDE' %}bg-success
+                            {% elif projet.statut == 'REJETE' %}bg-danger
+                            {% elif projet.statut == 'ETUDE' %}bg-warning
+                            {% else %}bg-secondary{% endif %}">
+                            {{ projet.get_statut_display }}
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Date soumission:</strong> {{ projet.date_soumission|date:"d/m/Y H:i" }}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Promoteur</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Nom:</strong> {{ projet.promoteur.nom }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Prénom:</strong> {{ projet.promoteur.prenom }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Email:</strong> {{ projet.promoteur.email }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Forme juridique:</strong> {{ projet.promoteur.forme_juridique }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <h5>Description du projet</h5>
+            <div class="card">
+                <div class="card-body">
+                    {{ projet.description_projet|linebreaks }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <h5>Plan d'affaire</h5>
+            <a href="{{ projet.plan_affaire.url }}" class="btn btn-outline-primary" target="_blank">
+                <i class="bi bi-download"></i> Télécharger le document
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projets:projet_list' %}">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projets:promoteur_list' %}">Promoteurs</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Référentiels
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'projets:forme_juridique_list' %}">Formes juridiques</a></li>
+                        <li><a class="dropdown-item" href="{% url 'projets:type_projet_list' %}">Types de projet</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" action="{% url 'projets:projet_search' %}" method="get">
+                <input class="form-control me-2" type="search" name="search" placeholder="Rechercher...">
+                <button class="btn btn-outline-light" type="submit">Chercher</button>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Nouveau Projet{% endblock %}
+
+{% block content %}
+<h2>Nouveau Projet</h2>
+
+<form method="post" enctype="multipart/form-data" class="mt-4">
+    {% csrf_token %}
+    
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="{{ form.nom_projet.id_for_label }}" class="form-label">Nom du projet</label>
+            {{ form.nom_projet }}
+            {% if form.nom_projet.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.nom_projet.errors.0 }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.type_projet.id_for_label }}" class="form-label">Type de projet</label>
+            {{ form.type_projet }}
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="{{ form.promoteur.id_for_label }}" class="form-label">Promoteur</label>
+            {{ form.promoteur }}
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.plan_affaire.id_for_label }}" class="form-label">Plan d'affaire</label>
+            {{ form.plan_affaire }}
+            <small class="text-muted">Formats acceptés: PDF, Word, Excel (Max 10MB)</small>
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="{{ form.description_projet.id_for_label }}" class="form-label">Description</label>
+        {{ form.description_projet }}
+    </div>
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+        <a href="{% url 'projets:projet_list' %}" class="btn btn-secondary me-md-2">
+            <i class="bi bi-arrow-left"></i> Annuler
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Enregistrer
+        </button>
+    </div>
+</form>
+{% endblock %}

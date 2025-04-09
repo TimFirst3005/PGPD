@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Créer une Forme Juridique{% endblock %}
+
+{% block content %}
+<h2>Nouvelle Forme Juridique</h2>
+
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="{{ form.code_forme.id_for_label }}" class="form-label">Code</label>
+            {{ form.code_forme }}
+            {% if form.code_forme.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.code_forme.errors.0 }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.libelle_forme.id_for_label }}" class="form-label">Libellé</label>
+            {{ form.libelle_forme }}
+        </div>
+    </div>
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'projets:forme_juridique_list' %}" class="btn btn-secondary me-md-2">
+            <i class="bi bi-arrow-left"></i> Annuler
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Enregistrer
+        </button>
+    </div>
+</form>
+{% endblock %}
