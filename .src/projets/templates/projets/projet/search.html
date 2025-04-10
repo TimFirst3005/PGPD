@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-primary me-2">
             <i class="bi bi-search"></i> Rechercher
         </button>
-        <a href="{% url 'projet_list' %}" class="btn btn-outline-secondary">
+        <a href="{% url 'projets:projet_list' %}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-counterclockwise"></i> Réinitialiser
         </a>
     </div>
@@ -60,7 +60,7 @@
                     </span>
                 </td>
                 <td>
-                    <a href="{% url 'projet_detail' projet.pk %}" class="btn btn-sm btn-info">
+                    <a href="{% url 'projets:projet_detail' projet.pk %}" class="btn btn-sm btn-info">
                         <i class="bi bi-eye"></i>
                     </a>
                 </td>
